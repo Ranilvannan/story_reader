@@ -1,0 +1,42 @@
+body {
+    line-height: 1.8;
+    color: rgba(33,33,54,0.9);
+    font-family: "euclid_circular_a","Source Sans Pro","Helvetica Neue","Helvetica","Arial",sans-serif;
+    text-rendering: optimizeLegibility;
+    font-size: 18px;
+    background: #28a74514;
+	}
+
+.blog-post{
+    cursor: pointer;
+}
+
+.navbar {
+
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 21;
+
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+
+}
+
+hr.dashed {
+    border-top: 2px dashed green;
+}
+
+.article{
+	background: white;
+}
+
+.blog-info {
+  background-color: #28a74514;
+  padding: 3px;
+}
+
+.blog-link{
+  color: rgb(4, 160, 241);
+}

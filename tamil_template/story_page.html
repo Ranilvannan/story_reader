@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{story.title}}{% endblock %}
+{% block description %}{{story.preview}}{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top:90px">
+	<div class="row">
+		<div class="col-sm-7 article pt-4">
+			<div class="story">
+                <div class="story-title p-4">
+                    <h4>{{story.title}}</h4>
+                    <p class="small">
+                        <b class="text-success pr-2">Published On</b>
+                        <i class="blog-info">{{ story.published_on }}</i>
+                        <strong>|</strong>
+                        <b class="text-success pr-2">Category</b>
+                        <a class="blog-info blog-link" href="{{ url_for('category_page', cat_id=story.category.url) }}">{{ story.category.name }}</a>
+                    </p>
+                </div>
+                {% if story.prev.url %}
+                    <div class="story-previous">
+                        <div class="alert alert-success">
+				            Prev: <a href="{{ url_for('story_page', cat_id=story.category.url, site_url=story.prev.url) }}">{{story.prev.name}}</a>
+			            </div>
+                    </div>
+                {% endif %}
+                <div class="story-content pt-4">
+                    {% for rec in story.content_ids %}
+			            <p>{{ rec }}</p>
+			        {% endfor %}
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

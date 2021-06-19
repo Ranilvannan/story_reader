@@ -1,0 +1,32 @@
+{% if pagination.is_valid%}
+    <div class="text-right p-4">
+
+        <a href="?page={{ pagination.prev_page }}"
+           class="btn btn-outline-success
+           {% if pagination.page == 1 %}disabled{% endif %}">
+           Prev
+        </a>
+
+        {% for rec in pagination.get_pages() %}
+            {% if rec==pagination.page %}
+                <a href="?page={{ rec }}"
+                   class="btn btn-success">
+                    {{ rec }}
+                </a>
+            {% elif rec=='...' %}
+                ...
+            {% else %}
+            <a href="?page={{ rec }}"
+               class="btn btn-outline-success">
+                {{ rec }}
+            </a>
+            {% endif %}
+        {% endfor %}
+
+        <a href="?page={{ pagination.next_page }}"
+           class="btn btn-outline-success
+           {% if pagination.page == pagination.total_page %}disabled{% endif %}">
+           Next
+        </a>
+    </div>
+{% endif %}
