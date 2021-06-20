@@ -5,6 +5,7 @@ import pymongo
 import os
 from datetime import datetime
 from urllib.parse import urlparse
+from dummy_article import TObject
 
 app = Flask(__name__)
 app.config.from_object('config.ProductionConfig')
@@ -117,7 +118,7 @@ def sitemap_page():
     dynamic_urls = list()
 
     home_page = {"loc": host_base,
-                 "lastmod": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")}
+                 "lastmod": datetime.now().strftime("%Y-%m-%d")}
     dynamic_urls.append(home_page)
 
     # Dynamic routes with dynamic content
@@ -128,8 +129,8 @@ def sitemap_page():
 
     for article in articles:
         url = {
-            "loc": f"{host_base}/category/{article.category_url}/{article.url}",
-            "lastmod": article.date_lastmod
+            "loc": f"{host_base}/category/{article['category_url']}/{article['url']}",
+            "lastmod": article['date']
         }
         dynamic_urls.append(url)
 

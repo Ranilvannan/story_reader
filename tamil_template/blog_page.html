@@ -1,0 +1,58 @@
+{% extends "public/base.html" %}
+{% block title %}{{article.title}}{% endblock %}
+{% block description %}{{article.preview}}{% endblock %}
+
+{% block body %}
+<div class="container" style="margin-top:90px">
+	<div class="row">
+		<div class="col-sm-7 article pt-4">
+			<div class="story">
+                <div class="story-title p-4">
+                    <h4>{{article.title}}</h4>
+                    <p class="small">
+                        <b class="text-success pr-2">Published On</b>
+                        <i class="blog-info">{{ article.published_on }}</i>
+                        <strong>|</strong>
+                        <b class="text-success pr-2">Category</b>
+                        <a class="blog-info blog-link" href="{{ url_for('category_page', category_url=article.category_url) }}">{{ article.category_name }}</a>
+                    </p>
+                </div>
+                {% if article.previous_url or article.next_url %}
+                    <div class="story-previous">
+                        <div class="alert alert-success">
+                            {% if article.previous_url %}
+				            Previous: <a href="{{ url_for('blog_page', category_url=article.category_url, blog_url=article.previous_url) }}">{{article.previous_title}}</a>
+                            {% endif %}
+                            <br>
+                            {% if article.next_url %}
+				            Next: <a href="{{ url_for('blog_page', category_url=article.category_url, blog_url=article.next_url) }}">{{article.next_title}}</a>
+                            {% endif %}
+			            </div>
+                    </div>
+                {% endif %}
+                <div class="story-content pt-4">
+                    {% for rec in article.content_ids %}
+			            <p>{{ rec }}</p>
+			        {% endfor %}
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 article pt-4">
+            <div class="row">
+                <div class="col-12 col-md-6 prev-post-start">
+                    <span class="d-block text-muted mb-3">&#171; Previous article</span>
+                    <a href="{{ article.previous_url }}">{{ article.previous_title }}</a>
+                </div>
+                <div class="col-12 col-md-6 next-post-end">
+                    <span class="d-block text-muted mb-3">Next article &#187;</span>
+                    <a href="{{ article.next_name }}">{{ article.next_title }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
