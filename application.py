@@ -14,7 +14,7 @@ PER_PAGE = 10
 
 def data_collect(table):
     uri = app.config.get("MONGO_URI")
-    database = app.config.get("DATABASE")
+    database = app.config.get("MONGO_DATABASE")
     client = pymongo.MongoClient(uri)
     db = client[database]
     return db[table]
@@ -22,9 +22,9 @@ def data_collect(table):
 
 @app.route('/images/<path:filename>')
 def custom_images(filename):
-    path = app.config['CUSTOM_STATIC_PATH']
-    blog = app.config.get("GALLERY")
-    gallery_col = data_collect()
+    path = app.config['CUSTOM_IMAGES_PATH']
+    gallery = app.config.get("MONGO_GALLERY_TABLE")
+    gallery_col = data_collect(gallery)
     gallery = gallery_col.find_one({"filename": filename})
 
     if not gallery:
@@ -148,10 +148,11 @@ def page_not_found(error):
 @app.cli.command('blog_update')
 def blog_update():
     path = app.config.get("IMPORT_PATH")
+    blog_code = app.config.get("BLOG_CODE")
     blog = app.config.get("MONGO_BLOG_TABLE")
     col = data_collect(blog)
     params = "blog_id"
-    file_suffix = "_blog.json"
+    file_suffix = "_{0}_blog.json".format(blog_code)
 
     bi = BlogInsert(path, col, params, file_suffix)
     bi.trigger_import()
@@ -175,7 +176,7 @@ def gallery_update():
     gallery = app.config.get("MONGO_GALLERY_TABLE")
     col = data_collect(gallery)
     params = "gallery_id"
-    file_suffix = "_galleryry.json"
+    file_suffix = "_gallery.json"
 
     bi = BlogInsert(path, col, params, file_suffix)
     bi.trigger_import()

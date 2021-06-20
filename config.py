@@ -4,13 +4,15 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    MONGO_URI = "mongodb://localhost:27017/tamil_book"
-    MONGO_DATABASE = "tamil_book"
-    BLOG_CODE = "Tamil"
-    IMPORT_PATH = "/var/tamil_book/"
-    CUSTOM_STATIC_PATH = "/var/tamil_book/images/"
+    MONGO_URI = "mongodb://localhost:27017/story_book"
+    MONGO_DATABASE = "story_book"
+
+    IMPORT_PATH = "/var/story_book"
+    CUSTOM_IMAGES_PATH = "/var/story_book/images"
     TEMPLATE_FOLDER_PATH = "test"
-    MONGO_BLOG_TABLE = "blog"
+
+    BLOG_CODE = "Tamil"
+    MONGO_BLOG_TABLE = "tamil_blog"
     MONGO_CATEGORY_TABLE = "category"
     MONGO_GALLERY_TABLE = "gallery"
 
