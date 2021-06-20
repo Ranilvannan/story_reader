@@ -54,28 +54,19 @@ def home_page():
         .skip(PER_PAGE * (page - 1)) \
         .limit(PER_PAGE)
 
-    header_info = {"title": "Title",
-                   "description": "Description",
-                   "keywords": "Keywords"}
-
     return render_template('home_page.html',
                            articles=articles,
-                           header_info=header_info,
                            pagination=pagination)
 
 
 @app.route('/category/<category_url>/')
 @app.route('/category/<category_url>')
-def category_page(category_url=None):
+def category_page(category_url):
     blog = app.config.get("MONGO_BLOG_TABLE")
     blog_col = data_collect(blog)
     page = request.args.get("page", type=int, default=1)
 
-    if category_url:
-        data_dict = {"blog_code": app.config['BLOG_CODE'], "category_url": category_url}
-    else:
-        data_dict = {"blog_code": app.config['BLOG_CODE']}
-
+    data_dict = {"blog_code": app.config['BLOG_CODE'], "category_url": category_url}
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
 
@@ -88,13 +79,16 @@ def category_page(category_url=None):
         .skip(PER_PAGE*(page-1))\
         .limit(PER_PAGE)
 
-    header_info = {"title": "Category Title",
-                   "description": "Description",
-                   "keywords": "Keywords"}
+    category_table = app.config.get("MONGO_CATEGORY_TABLE")
+    category_col = data_collect(category_table)
+    category = category_col.find_one({"url": category_url})
+
+    if not category:
+        return render_template('public/no_result.html')
 
     return render_template('category_page.html',
                            articles=articles,
-                           header_info=header_info,
+                           category=category,
                            pagination=pagination)
 
 

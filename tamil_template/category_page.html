@@ -1,6 +1,6 @@
 {% extends "public/base.html" %}
-{% block title %}{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block description %}{{ category.description }}{% endblock %}
 
 {% block body %}
 <div class="container" style="margin-top:90px">
