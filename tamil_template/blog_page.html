@@ -5,9 +5,9 @@
 {% block body %}
 <div class="container" style="margin-top:90px">
 	<div class="row">
-		<div class="col-sm-7 article pt-4">
+		<div class="col-sm-7 article pt-1">
 			<div class="story">
-                <div class="story-title p-4">
+                <div class="story-title p-2">
                     <h4>{{article.title}}</h4>
                     <p class="small">
                         <b class="text-success pr-2">Published On</b>
@@ -30,7 +30,7 @@
 			            </div>
                     </div>
                 {% endif %}
-                <div class="story-content pt-4">
+                <div class="story-content pt-2">
                     {% for rec in article.content_ids %}
 			            <p>{{ rec }}</p>
 			        {% endfor %}
@@ -38,21 +38,5 @@
             </div>
 		</div>
 	</div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-7 article pt-4">
-            <div class="row">
-                <div class="col-12 col-md-6 prev-post-start">
-                    <span class="d-block text-muted mb-3">&#171; Previous article</span>
-                    <a href="{{ article.previous_url }}">{{ article.previous_title }}</a>
-                </div>
-                <div class="col-12 col-md-6 next-post-end">
-                    <span class="d-block text-muted mb-3">Next article &#187;</span>
-                    <a href="{{ article.next_name }}">{{ article.next_title }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}
