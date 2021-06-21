@@ -9,7 +9,8 @@ from dummy_article import TObject
 
 app = Flask(__name__)
 app.config.from_object('config.ProductionConfig')
-app.template_folder = 'tamil_template'
+app.config.from_json('config.json')
+app.template_folder = app.config.get("TEMPLATE_FOLDER_PATH")
 PER_PAGE = 10
 
 
