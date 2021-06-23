@@ -148,6 +148,11 @@ def sitemap_page():
     return response
 
 
+@app.route('/robots.txt')
+def robot_file():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('public/404.html', title='404'), 404
