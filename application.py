@@ -9,7 +9,7 @@ from dummy_article import TObject
 
 app = Flask(__name__)
 app.config.from_object('config.ProductionConfig')
-app.config.from_json('config.json')
+app.config.from_json('/etc/story_reader/tamil_config.json')
 app.template_folder = app.config.get("TEMPLATE_FOLDER_PATH")
 PER_PAGE = 10
 
