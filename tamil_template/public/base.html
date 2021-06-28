@@ -5,8 +5,7 @@
 	<meta name="description" content="{% block description %}{% endblock %}">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
 	<link rel='canonical' href="{{ request.url }}">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Open+Sans&family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='font/font.css') }}">
 	<meta charset="utf-8">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MSVN84ZY8H"></script>
@@ -18,11 +17,11 @@
 	  gtag('config', 'G-MSVN84ZY8H');
 	</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-sm bg-success navbar-dark">
