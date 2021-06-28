@@ -46,10 +46,6 @@ def home_page():
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
 
-    # No Blog found
-    if not (1 <= page <= pagination.total_pages):
-        return render_template('public/no_result.html')
-
     articles = blog_col.find(data_dict) \
         .sort("blog_id", -1) \
         .skip(PER_PAGE * (page - 1)) \
@@ -63,6 +59,13 @@ def home_page():
 @app.route('/category/<category_url>/')
 @app.route('/category/<category_url>')
 def category_page(category_url):
+    category_table = app.config.get("MONGO_CATEGORY_TABLE")
+    category_col = data_collect(category_table)
+    category = category_col.find_one({"url": category_url})
+
+    if not category:
+        return abort(404)
+
     blog = app.config.get("MONGO_BLOG_TABLE")
     blog_col = data_collect(blog)
     page = request.args.get("page", type=int, default=1)
@@ -79,13 +82,6 @@ def category_page(category_url):
         .sort("blog_id", -1)\
         .skip(PER_PAGE*(page-1))\
         .limit(PER_PAGE)
-
-    category_table = app.config.get("MONGO_CATEGORY_TABLE")
-    category_col = data_collect(category_table)
-    category = category_col.find_one({"url": category_url})
-
-    if not category:
-        return render_template('public/no_result.html')
 
     return render_template('category_page.html',
                            articles=articles,
