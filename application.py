@@ -46,7 +46,7 @@ def home_page():
     data_dict = {"blog_code": app.config['BLOG_CODE'],
                  "date": {
                      "$gte": START_DATE,
-                     "$lt": datetime.now().strftime("%Y-%m-%d")
+                     "$lt": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                  }}
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
@@ -79,7 +79,7 @@ def category_page(category_url):
                  "category_url": category_url,
                  "date": {
                      "$gte": START_DATE,
-                     "$lt": datetime.now().strftime("%Y-%m-%d")
+                     "$lt": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                  }}
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
