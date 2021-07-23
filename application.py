@@ -12,6 +12,7 @@ app.config.from_object('config.ProductionConfig')
 app.config.from_json('config.json')
 app.template_folder = app.config.get("TEMPLATE_FOLDER_PATH")
 PER_PAGE = 10
+START_DATE = "2021-01-01"
 
 
 def data_collect(table):
@@ -42,7 +43,11 @@ def home_page():
     blog_col = data_collect(blog)
     page = request.args.get("page", type=int, default=1)
 
-    data_dict = {"blog_code": app.config['BLOG_CODE']}
+    data_dict = {"blog_code": app.config['BLOG_CODE'],
+                 "date": {
+                     "$gte": START_DATE,
+                     "$lt": datetime.now().strftime("%Y-%m-%d")
+                 }}
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
 
@@ -70,7 +75,12 @@ def category_page(category_url):
     blog_col = data_collect(blog)
     page = request.args.get("page", type=int, default=1)
 
-    data_dict = {"blog_code": app.config['BLOG_CODE'], "category_url": category_url}
+    data_dict = {"blog_code": app.config['BLOG_CODE'],
+                 "category_url": category_url,
+                 "date": {
+                     "$gte": START_DATE,
+                     "$lt": datetime.now().strftime("%Y-%m-%d")
+                 }}
     total_story = blog_col.find(data_dict).count(True)
     pagination = Pagination(page=page, total=total_story, search=False, record_name='users', css_framework='bootstrap4')
 
