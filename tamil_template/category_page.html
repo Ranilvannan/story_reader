@@ -8,6 +8,9 @@
 		<div class="col-sm-7 article pt-4">
 			{% for article in articles %}
 				<article class="blog-post" onclick="location.href='{{ url_for('blog_page', category_url=article.category_url, blog_url=article.url) }}'">
+					{% if article.image_filename %}
+						<img src="{{ url_for('custom_images', filename=article.image_filename) }}" width="100%">
+					{% endif %}
 					<h4 class="blog-post-title p-2">{{ article.title }}</h4>
 					<p class="blog-post-preview p-2">{{ article.preview }}</p>
 					<div class="blog-post-status p-2">

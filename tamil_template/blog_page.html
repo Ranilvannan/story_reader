@@ -30,6 +30,9 @@
 			            </div>
                     </div>
                 {% endif %}
+                {% if article.image_filename %}
+                    <img src="{{ url_for('custom_images', filename=article.image_filename) }}" width="100%">
+                {% endif %}
                 <div class="story-content pt-2">
                     {% for rec in article.content_ids %}
 			            <p>{{ rec }}</p>
